@@ -28,22 +28,10 @@ class Monstre:
         else:
             return False
 
-    def drawfruit(self, window):
-        x = random.randint(0, 10)
-        if x <= 5:
-            FRUITS_IMG = pygame.image.load("img/citron.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(1)
-        if 5 < x <= 8:
-            FRUITS_IMG = pygame.image.load("img/pomme.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(2)
-        if x > 8:
-            FRUITS_IMG = pygame.image.load("img/banane.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(3)
-
-        window.blit(FRUITS_IMG, (self.point.x, self.point.y))
+    def drawMonstre(self, window):
+        MONSTRE_IMG = pygame.image.load("img/grandma.png")
+        MONSTRE_IMG = pygame.transform.scale(MONSTRE_IMG, (150, 150))
+        window.blit(MONSTRE_IMG, (self.point.x, self.point.y))
 
 
 
