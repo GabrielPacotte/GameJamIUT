@@ -43,6 +43,7 @@ def drawGrass():
 if __name__ == '__main__':
 
     clock = pygame.time.Clock()
+    score = 0
     while True:
         clock.tick(60)
         time = pygame.time.get_ticks() - time_Before
@@ -70,10 +71,18 @@ if __name__ == '__main__':
         player.draw(WIN)
         grandma.drawGrandma(WIN)
         for fruit in fruits:
-            if fruit.inHitBoxPlayer(player.point) or fruit.inHitBoxGrandma(grandma.point):
+            if fruit.inHitBoxPlayer(player.point):
+                fruits.remove(fruit)
+                score = score + fruit.getEnergy()
+            elif fruit.inHitBoxGrandma(grandma.point):
                 fruits.remove(fruit)
             else:
                 fruit.drawFruit(WIN)
+
+        font = pygame.font.Font(None, 24)
+        text = font.render("score : "+str(score), 1, (255, 255, 255))
+        WIN.blit(text, (10, 10))
+
         coord = pygame.mouse.get_pos()
         WIN.blit(CURSOR, coord)
         pygame.display.update()
