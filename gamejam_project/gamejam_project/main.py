@@ -30,9 +30,13 @@ if __name__ == '__main__':
     while True:
         clock.tick(60)
         time = pygame.time.get_ticks() - time_Before
-        # Update objects position
+        # Update player position
         player.move()
-
+        # Create new fruits
+        if time > 2000:
+            fruits.append(Fruit("fruit", 1, Point(random.randint(0, 780), random.randint(0, 580))))
+            time_Before = pygame.time.get_ticks()
+        
         # Draw the window
         WIN.fill((0, 0, 0))
 

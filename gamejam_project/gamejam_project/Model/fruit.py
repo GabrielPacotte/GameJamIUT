@@ -9,6 +9,19 @@ class Fruit:
         self.name = name
         self.energy = energy
         self.point = point
+        x = random.randint(0, 10)
+        if x <= 5:
+            self.FRUITS_IMG = pygame.image.load("img/fruits/citron.png")
+            self.FRUITS_IMG = pygame.transform.scale(self.FRUITS_IMG, (20, 20))
+            self.setEnergy(1)
+        if 5 < x <= 8:
+            self.FRUITS_IMG = pygame.image.load("img/fruits/pomme.png")
+            self.FRUITS_IMG = pygame.transform.scale(self.FRUITS_IMG, (20, 20))
+            self.setEnergy(2)
+        if x > 8:
+            self.FRUITS_IMG = pygame.image.load("img/fruits/banane.png")
+            self.FRUITS_IMG = pygame.transform.scale(self.FRUITS_IMG, (20, 20))
+            self.setEnergy(3)
 
     def getname(self) -> str:
         return self.name
@@ -29,21 +42,7 @@ class Fruit:
             return False
 
     def drawFruit(self, window):
-        x = random.randint(0, 10)
-        if x <= 5:
-            FRUITS_IMG = pygame.image.load("img/citron.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(1)
-        if 5 < x <= 8:
-            FRUITS_IMG = pygame.image.load("img/pomme.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(2)
-        if x > 8:
-            FRUITS_IMG = pygame.image.load("img/banane.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(3)
-
-        window.blit(FRUITS_IMG, (self.point.x, self.point.y))
+        window.blit(self.FRUITS_IMG, (self.point.x, self.point.y))
 
 
 
