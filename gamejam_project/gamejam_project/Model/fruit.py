@@ -35,13 +35,20 @@ class Fruit:
     def getPoint(self) -> Point:
         return self.point
 
-    def inHitBox(self, point: Point) -> bool:
+    def inHitBoxPlayer(self, point: Point) -> bool:
         if point.getx() <= self.getPoint().getx() <= point.getx() + 42 and point.gety() <= self.getPoint().gety() <= point.gety() +63 \
                 or point.getx() <= self.getPoint().getx() + 20 <= point.getx() + 42 and point.gety() <= self.getPoint().gety()+20 <= point.gety() + 63 :
             return True
-        else :
+        else:
             return False
- #63
+
+    def inHitBoxGrandma(self, point: Point) -> bool:
+        if point.getx() <= self.getPoint().getx() <= point.getx() + 150 and point.gety() <= self.getPoint().gety() <= point.gety() + 150 \
+                or point.getx() <= self.getPoint().getx() + 20 <= point.getx() + 150 and point.gety() <= self.getPoint().gety() + 20 <= point.gety() + 150:
+            return True
+        else:
+            return False
+
     def drawFruit(self, window):
         window.blit(self.FRUITS_IMG, (self.point.x, self.point.y))
 

@@ -5,7 +5,7 @@ import pygame
 from Model.Player import Player
 from Model.Point import Point
 from Model.fruit import Fruit
-
+from Model.GrandMa import GrandMa
 pygame.init()
 
 # Window settings
@@ -19,7 +19,7 @@ grass_img = pygame.image.load("img/bg_grass.png")
 
 # First instances
 player = Player("Gab", 3, Point(100, 100))
-
+grandma = GrandMa("mamie", 100, Point(325,225))
 # Fruits
 time_Before = pygame.time.get_ticks()
 
@@ -48,10 +48,13 @@ if __name__ == '__main__':
 
         # Draw the window
         drawGrass()
-
-        for fruit in fruits:
-            fruit.drawFruit(WIN)
         player.draw(WIN)
+        grandma.drawGrandma(WIN)
+        for fruit in fruits:
+            if fruit.inHitBoxPlayer(player.point) or fruit.inHitBoxGrandma(grandma.point):
+                fruits.remove(fruit)
+            else:
+                fruit.drawFruit(WIN)
         coord = pygame.mouse.get_pos()
         WIN.blit(CURSOR, coord)
         pygame.display.update()
