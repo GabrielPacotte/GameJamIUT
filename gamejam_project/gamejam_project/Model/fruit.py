@@ -41,7 +41,6 @@ class Fruit:
         else:
             return False
 
-<<<<<<< HEAD
     def drawfruit(self, window):
         x = random.randint(0, 10)
         if x <= 5:
@@ -58,10 +57,10 @@ class Fruit:
             self.setenergy(3)
 
         window.blit(FRUITS_IMG, (self.point.x, self.point.y))
-=======
+
     def drawFruit(self, window):
         window.blit(self.FRUITS_IMG, (self.point.x, self.point.y))
->>>>>>> 1d865be96ed08f3678b5cf174946c8e00ba9f181
+
 
 
 
