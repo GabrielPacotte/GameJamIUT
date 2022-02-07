@@ -36,28 +36,12 @@ class Fruit:
         return self.point
 
     def inHitBox(self, point: Point) -> bool:
-        if self.getpoint().getx() <= point.getx() <= self.getpoint().getx() + 20 and self.getpoint().gety() <= point.gety() <= self.getpoint().gety() + 20:
+        if point.getx() <= self.getPoint().getx() <= point.getx() + 42 and point.gety() <= self.getPoint().gety() <= point.gety() +63 \
+                or point.getx() <= self.getPoint().getx() + 20 <= point.getx() + 42 and point.gety() <= self.getPoint().gety()+20 <= point.gety() + 63 :
             return True
-        else:
+        else :
             return False
-
-    def drawfruit(self, window):
-        x = random.randint(0, 10)
-        if x <= 5:
-            FRUITS_IMG = pygame.image.load("img/citron.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(1)
-        if 5 < x <= 8:
-            FRUITS_IMG = pygame.image.load("img/pomme.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(2)
-        if x > 8:
-            FRUITS_IMG = pygame.image.load("img/banane.png")
-            FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
-            self.setenergy(3)
-
-        window.blit(FRUITS_IMG, (self.point.x, self.point.y))
-
+ #63
     def drawFruit(self, window):
         window.blit(self.FRUITS_IMG, (self.point.x, self.point.y))
 
