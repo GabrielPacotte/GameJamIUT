@@ -13,13 +13,13 @@ class Fruit:
     def getname(self) -> str:
         return self.name
 
-    def getenerergy(self) -> str:
+    def getEnergy(self) -> str:
         return self.energy
 
-    def setenergy(self, valeur):
+    def setEnergy(self, valeur):
         self.energy = valeur
 
-    def getpoint(self) -> Point:
+    def getPoint(self) -> Point:
         return self.point
 
     def inHitBox(self, point: Point) -> bool:
@@ -28,18 +28,18 @@ class Fruit:
         else:
             return False
 
-    def drawfruit(self, window):
+    def drawFruit(self, window):
         x = random.randint(0, 10)
         if x <= 5:
-            FRUITS_IMG = pygame.image.load("../img/citron.png")
+            FRUITS_IMG = pygame.image.load("img/citron.png")
             FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
             self.setenergy(1)
         if 5 < x <= 8:
-            FRUITS_IMG = pygame.image.load("../img/pomme.png")
+            FRUITS_IMG = pygame.image.load("img/pomme.png")
             FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
             self.setenergy(2)
         if x > 8:
-            FRUITS_IMG = pygame.image.load("../img/banane.png")
+            FRUITS_IMG = pygame.image.load("img/banane.png")
             FRUITS_IMG = pygame.transform.scale(FRUITS_IMG, (20, 20))
             self.setenergy(3)
 
