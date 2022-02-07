@@ -3,27 +3,27 @@ import random
 from Model.Point import Point
 
 
-class Fruit:
+class Monstre:
 
-    def __init__(self, name, energy, point: Point):
+    def __init__(self, name, life, point: Point):
         self.name = name
-        self.energy = energy
+        self.life = life
         self.point = point
 
-    def getname(self) -> str:
+    def getName(self) -> str:
         return self.name
 
-    def getenerergy(self) -> str:
-        return self.energy
+    def getLife(self) -> str:
+        return self.life
 
     def setenergy(self, valeur):
-        self.energy = valeur
+        self.life = valeur
 
-    def getpoint(self) -> Point:
+    def getPoint(self) -> Point:
         return self.point
 
     def inHitBox(self, point: Point) -> bool:
-        if self.getpoint().getx() <= point.getx() <= self.getpoint().getx() + 20 and self.getpoint().gety() <= point.gety() <= self.getpoint().gety() + 20:
+        if self.getpoint().getx() <= point.getx() <= self.getpoint().getx() + 150 and self.getpoint().gety() <= point.gety() <= self.getpoint().gety() + 150:
             return True
         else:
             return False
