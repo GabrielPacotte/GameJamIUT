@@ -31,7 +31,11 @@ class GrandMa:
     def drawGrandma(self, window):
         MONSTRE_IMG = pygame.image.load("img/grandma.png")
         MONSTRE_IMG = pygame.transform.scale(MONSTRE_IMG, (100, 100))
+<<<<<<< HEAD
         window.blit(MONSTRE_IMG, (self.point.x, self.point.y))
 
 
 
+=======
+        window.blit(MONSTRE_IMG, (self.point.x, self.point.y))
+>>>>>>> 0ec70729236ffcbe4c6b31a3012978cf43007e5b
