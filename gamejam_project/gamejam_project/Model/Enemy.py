@@ -14,7 +14,7 @@ for i in range(1, 3):
 class Enemy:
     SLIME = 1
 
-    def __init__(self, hp, moveSpeed, type, point: Point, target: Point):
+    def __init__(self, hp, moveSpeed, type, point: Point, target: Point, damages):
         self.hp = hp
         self.moveSpeed = moveSpeed
         if type == Enemy.SLIME:
@@ -26,6 +26,13 @@ class Enemy:
         self.yVel = math.sin(self.angle) * self.moveSpeed
         self.currentSprite = self.sprites[0]
         self.spriteCounter = 0
+        self.damages = damages
+
+    def getDamages(self) -> int:
+        return self.damages
+
+    def setDamages(self, damages):
+        self.damages = damages
 
     def draw(self, window):
         self.animate()

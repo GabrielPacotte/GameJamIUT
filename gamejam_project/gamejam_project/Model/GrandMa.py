@@ -49,6 +49,16 @@ class GrandMa:
         else:
             return False
 
+    def inHitBoxEnemy(self, point: Point) ->bool:
+        point2 = Point(point.getx()+48, point.gety())
+        point3 = Point(point.getx(), point.gety()+32)
+        point4 = Point(point.getx()+48, point.gety()+32)
+
+        if self.inHitBox(point) or self.inHitBox(point2) or self.inHitBox(point3) or self.inHitBox(point4):
+            return True
+        else:
+            return False
+
     def drawGrandma(self, window, bool):
         GRANDMA_IMG = pygame.image.load("img/grandma.png")
         GRANDMA_IMG = pygame.transform.scale(GRANDMA_IMG, (100, 100))
