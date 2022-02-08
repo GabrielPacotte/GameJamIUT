@@ -103,9 +103,12 @@ if __name__ == '__main__':
                 bullets.pop(bullets.index(bullet))
 
             if grandma.inHitBoxBullet(bullet.point):
-                grandma.drawGrandma(WIN, True)
+                grandma.drawGrandma(WIN, False)
                 bullets.remove(bullet)
-                perdu = True
+                grandma.setLife(grandma.getLife()-10)
+
+        if grandma.getLife() <= 0:
+            perdu = True
 
         player.draw(WIN)
         for fruit in fruits:
