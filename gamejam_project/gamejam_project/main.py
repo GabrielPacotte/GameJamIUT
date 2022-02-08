@@ -37,7 +37,7 @@ bullets = []
 
 # Enemies
 
-enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(400, 300), 10)]
+enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(400, 300), 10), Enemy(1, 1, Enemy.SLIME, Point(0,768), Point(400, 300), 10), Enemy(1, 1, Enemy.SLIME, Point(1000,768), Point(400, 300), 10)]
 
 #nbFruits
 nbBanana = 0
