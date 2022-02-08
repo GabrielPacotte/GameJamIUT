@@ -48,6 +48,7 @@ class GrandMa:
             return True
         else:
             return False
+
     def drawGrandma(self, window, bool):
         GRANDMA_IMG = pygame.image.load("img/grandma.png")
         GRANDMA_IMG = pygame.transform.scale(GRANDMA_IMG, (100, 100))
