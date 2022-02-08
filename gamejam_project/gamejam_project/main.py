@@ -22,7 +22,7 @@ pygame.mouse.set_visible(False)  # hide the cursor
 grass_img = pygame.image.load("img/bg_grass.png")
 
 # First instances
-player = Player("Gab", 3, Point(100, 100))
+player = Player("Gab", 3, Point(100, 100),[])
 grandma = GrandMa("mamie", 100, Point(325, 225))
 # Fruits
 time_Before = pygame.time.get_ticks()

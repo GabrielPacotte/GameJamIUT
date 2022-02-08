@@ -1,5 +1,6 @@
 import pygame
 from Model.Point import Point
+from Model.fruit import Fruit
 
 # ------------------------------------------------------------------------
 # LOAD ALL SPRITES FOR ANIMATIONS
@@ -33,12 +34,13 @@ for i in range(1, 6):
 
 class Player:
 
-    def __init__(self, name, moveSpeed, point: Point):
+    def __init__(self, name, moveSpeed, point: Point, inventory):
         self.name = name
         self.moveSpeed = moveSpeed
         self.point = point
         self.currentSprite = 0
         self.player_img = moveDownSprites[0]
+        self.inventory = []
 
     # Used to move the player thanks to arrow keys
     def move(self):
@@ -88,6 +90,13 @@ class Player:
         else:  # Else stay idle
             self.currentSprite = 0
             self.player_img = moveDownSprites[int(self.currentSprite)]
+
+    def addFruit(self, fruit: Fruit) -> bool:
+        if len(self.inventory) == 3:
+            return False
+        else:
+            self.inventory.append(fruit)
+            return True
 
     # Used to draw the current image of the player at the right location of the screen
     def draw(self, window):
