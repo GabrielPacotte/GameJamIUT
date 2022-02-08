@@ -72,11 +72,21 @@ if __name__ == '__main__':
 
         for fruit in fruits:
             fruit.drawFruit(WIN)
+
         # Draw reverse grandma if you shot her with bullet
         if not perdu:
             grandma.drawGrandma(WIN, False)
         else:
             grandma.drawGrandma(WIN, True)
+
+        # Grandma's Life bar
+        pygame.draw.rect(WIN, (255,255,255), pygame.Rect(325, 200, 100, 10))
+        if not perdu:
+            if grandma.getLife() > 200:
+                grandma.setLife(200)
+            pygame.draw.rect(WIN, (0,255,0), pygame.Rect(325, 200, grandma.getLife()/2, 10))
+        else:
+            pygame.draw.rect(WIN, (255,0,0), pygame.Rect(325, 200, 100, 10))
 
         for enemy in enemies:
             enemy.draw(WIN)
