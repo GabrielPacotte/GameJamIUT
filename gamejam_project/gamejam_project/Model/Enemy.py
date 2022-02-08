@@ -32,7 +32,7 @@ class Enemy:
             else: # spawn on right
                 x = 1072
                 y = random.randint(0, 678)
-            Enemy.timer = 20
+            Enemy.timer = random.random() * 20
             enemiesList.append(Enemy(1, random.random() * 3, Enemy.SLIME, Point(x, y), Point(512, 384), 10))
 
 
