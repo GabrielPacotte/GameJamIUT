@@ -107,6 +107,7 @@ if __name__ == '__main__':
 
             if grandma.inHitBoxBullet(bullet.point):
                 grandma.drawGrandma(WIN, True)
+                bullets.remove(bullet)
                 perdu = True
 
         player.draw(WIN)
