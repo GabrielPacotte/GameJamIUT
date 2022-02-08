@@ -39,6 +39,10 @@ bullets = []
 
 enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(400, 300))]
 
+#nbFruits
+nbBanana = 0
+nbApple = 0
+nbLemon = 0
 
 def drawGrass():
     for i in range(0, 475):
@@ -105,19 +109,36 @@ if __name__ == '__main__':
         for fruit in fruits:
             if fruit.inHitBoxPlayer(player.point):
                 if player.addFruit(fruit):
+                    if fruit.name == "banana":
+                        nbBanana = nbBanana + 1
+                    elif fruit.name == "lemon":
+                        nbLemon = nbLemon + 1
+                    else:
+                        nbApple = nbApple + 1
                     fruits.remove(fruit)
-                    score = score + fruit.getEnergy()
                 else:
                     fruit.drawFruit(WIN)
             elif fruit.inHitBoxGrandma(grandma.point):
                 fruits.remove(fruit)
             else:
                 fruit.drawFruit(WIN)
-        for fruit in player.inventory:
-            print(fruit.getname())
 
+        # Feed the gandma
+        if grandma.inHitBoxPlayer(player.point):
+            count = 0
+            for fruit in player.inventory:
+                count = count + fruit.getEnergy()
+                score = score + fruit.getEnergy()
+            player.inventory.clear()
+            grandma.setLife(grandma.getLife() + count)
+            nbBanana = 0
+            nbApple = 0
+            nbLemon = 0
+
+        # Printing score and inventory
         font = pygame.font.Font(None, 24)
-        text = font.render("score : " + str(score), 1, (255, 255, 255))
+        text = font.render("score : " + str(score)+" | banana : "+str(nbBanana)+" | Apple : "+str(nbApple)+" | Lemon : "
+                           + str(nbLemon), 1, (255, 255, 255))
         WIN.blit(text, (10, 10))
 
         coord = pygame.mouse.get_pos()
