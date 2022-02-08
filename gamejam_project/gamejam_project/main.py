@@ -13,7 +13,7 @@ from Model.GrandMa import GrandMa
 pygame.init()
 
 # Window settings
-WIN_WIDTH, WIN_HEIGHT = 800, 600
+WIN_WIDTH, WIN_HEIGHT = 1024, 768
 WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 CURSOR = pygame.image.load("img/cursor.png")
 pygame.mouse.set_visible(False)  # hide the cursor
@@ -45,9 +45,9 @@ nbApple = 0
 nbLemon = 0
 
 def drawGrass():
-    for i in range(0, 475):
-        x = i % 25
-        y = (i - x) / 25
+    for i in range(0, 768):
+        x = i % 32
+        y = (i - x) / 32
         WIN.blit(grass_img, (x * 32, y * 32))
 
 
