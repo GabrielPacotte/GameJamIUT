@@ -54,22 +54,33 @@ if __name__ == '__main__':
     clock = pygame.time.Clock()
     score = 0
     perdu = False
-    while True:
+    compteur_cycle = 1
+    while not perdu:
         clock.tick(60)
         time = pygame.time.get_ticks() - time_Before
         # Update player position
         player.move()
-        # CYCLE DE NUIT ------------------------------------------------------------------------------------------------
+        # NIGHT'S CYCLE ------------------------------------------------------------------------------------------------
         if cycle.getCycle() == "night":
 
             Enemy.randomEnemySpawn(WIN, enemies)
             time_cycle = pygame.time.get_ticks() - time_cycle_before
             if time_cycle > 20000:
-                print("caca")
                 time_cycle_before = pygame.time.get_ticks()
                 cycle.cycleChange()
+                compteur_cycle = compteur_cycle + 1
+                grass_img = pygame.image.load("img/day.png")
+                WIN.blit(grass_img, (0, 0))
+                pygame.display.update()
+                pygame.time.wait(1000)
+                grass_img = pygame.image.load("img/grass.png")
 
-        # CYCLE DE JOUR ------------------------------------------------------------------------------------------------
+            font = pygame.font.Font(None, 24)
+            text = font.render("nuit "+str(compteur_cycle), 1, (255, 255, 255))
+            WIN.blit(text, (10, 30))
+
+
+        # DAY'S CYCLE --------------------------------------------------------------------------------------------------
         if cycle.getCycle() == "day":
             # Create new fruits
             if time > 2000:
@@ -79,7 +90,16 @@ if __name__ == '__main__':
             if time_cycle > 20000:
                 time_cycle_before = pygame.time.get_ticks()
                 cycle.cycleChange()
-                print("pipi")
+                grass_img = pygame.image.load("img/night.png")
+                WIN.blit(grass_img, (0, 0))
+                pygame.display.update()
+                pygame.time.wait(1000)
+                grass_img = pygame.image.load("img/grass.png")
+
+            font = pygame.font.Font(None, 24)
+            text = font.render("jour "+str(compteur_cycle), 1, (255, 255, 255))
+            WIN.blit(text, (10, 30))
+
 
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -88,7 +108,7 @@ if __name__ == '__main__':
                                               Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
         # Draw the window
         WIN.blit(grass_img, (0, 0))
-
+        WIN.blit(text, (10, 30))
         for fruit in fruits:
             fruit.drawFruit(WIN)
 
@@ -171,3 +191,20 @@ if __name__ == '__main__':
         WIN.blit(CURSOR, coord)
         pygame.display.update()
         pygame.event.pump()
+
+    while perdu:
+        WIN.blit(grass_img, (0, 0))
+
+        for fruit in fruits:
+            fruit.drawFruit(WIN)
+
+        grandma.drawGrandma(WIN, True)
+
+        pygame.draw.rect(WIN, (255, 0, 0), pygame.Rect(450, 314, 100, 10))
+
+        font = pygame.font.Font(None, 200)
+        text = font.render("GAME OVER", 1, (255, 255, 255))
+        WIN.blit(text, (80, 150))
+        pygame.display.update()
+        pygame.event.pump()
+
