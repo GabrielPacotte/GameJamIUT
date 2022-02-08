@@ -23,12 +23,12 @@ grass_img = pygame.image.load("img/grass.png")
 
 # First instances
 player = Player("Gab", 3, Point(100, 100), [])
-grandma = GrandMa("mamie", 100, Point(325, 225))
+grandma = GrandMa("mamie", 100, Point(450, 334))
 # Fruits
 time_Before = pygame.time.get_ticks()
 
-newFruitX = random.randint(0, 780)
-newFruitY = random.randint(0, 580)
+newFruitX = random.randint(0, 1004)
+newFruitY = random.randint(0, 748)
 fruits = [Fruit("fruit", 1, Point(newFruitX, newFruitY))]
 
 # Balles
@@ -37,7 +37,7 @@ bullets = []
 
 # Enemies
 
-enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(400, 300), 10), Enemy(1, 1, Enemy.SLIME, Point(0,768), Point(400, 300), 10), Enemy(1, 1, Enemy.SLIME, Point(1000,768), Point(400, 300), 10)]
+enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(512, 384), 10), Enemy(1, 1, Enemy.SLIME, Point(0,768), Point(512, 384), 10), Enemy(1, 1, Enemy.SLIME, Point(1000,768), Point(512, 384), 10)]
 
 #nbFruits
 nbBanana = 0
@@ -62,7 +62,7 @@ if __name__ == '__main__':
                                           Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
         # Create new fruits
         if time > 2000:
-            fruits.append(Fruit("fruit", 1, Point(random.randint(0, 780), random.randint(0, 580))))
+            fruits.append(Fruit("fruit", 1, Point(random.randint(0, 1004), random.randint(0, 748))))
             time_Before = pygame.time.get_ticks()
 
         # Draw the window
@@ -78,13 +78,13 @@ if __name__ == '__main__':
             grandma.drawGrandma(WIN, True)
 
         # Grandma's Life bar
-        pygame.draw.rect(WIN, (255, 255, 255), pygame.Rect(325, 200, 100, 10))
+        pygame.draw.rect(WIN, (255, 255, 255), pygame.Rect(450, 314, 100, 10))
         if not perdu:
             if grandma.getLife() > 200:
                 grandma.setLife(200)
-            pygame.draw.rect(WIN, (0, 255, 0), pygame.Rect(325, 200, grandma.getLife()/2, 10))
+            pygame.draw.rect(WIN, (0, 255, 0), pygame.Rect(450, 314, grandma.getLife()/2, 10))
         else:
-            pygame.draw.rect(WIN, (255, 0, 0), pygame.Rect(325, 200, 100, 10))
+            pygame.draw.rect(WIN, (255, 0, 0), pygame.Rect(450, 314, 100, 10))
 
         # draw enemies
         for enemy in enemies:
