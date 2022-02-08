@@ -53,6 +53,7 @@ if __name__ == '__main__':
         clock.tick(60)
         time = pygame.time.get_ticks() - time_Before
         # Update player position
+        Enemy.randomEnemySpawn(WIN, enemies)
         player.move()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
