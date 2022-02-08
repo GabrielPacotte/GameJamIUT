@@ -33,6 +33,16 @@ class Enemy:
         self.point.y += self.yVel
         window.blit(self.currentSprite, (self.point.x, self.point.y))
 
+    def inHitBoxBullet(self, point: Point) -> bool:
+        point2 = Point(point.getx() + 10, point.gety())
+        point3 = Point(point.getx(), point.gety() + 10)
+        point4 = Point(point.getx() + 10, point.gety() + 10)
+
+        if self.inHitBox(point) or self.inHitBox(point2) or self.inHitBox(point3) or self.inHitBox(point4):
+            return True
+        else:
+            return False
+
     def animate(self):
         self.currentSprite = self.sprites[int(self.spriteCounter)]
         self.spriteCounter += 0.1
