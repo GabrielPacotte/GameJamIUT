@@ -37,7 +37,7 @@ bullets = []
 
 # Enemies
 
-enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(400, 300))]
+enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(400, 300), 10), Enemy(1, 1, Enemy.SLIME, Point(0,768), Point(400, 300), 10), Enemy(1, 1, Enemy.SLIME, Point(1000,768), Point(400, 300), 10)]
 
 #nbFruits
 nbBanana = 0
@@ -91,6 +91,9 @@ if __name__ == '__main__':
                 if enemy.inHitBoxBullet(bullet.point):
                     enemies.remove(enemy)
                     bullets.remove(bullet)
+            if grandma.inHitBoxEnemy(enemy.point):
+                enemies.remove(enemy)
+                grandma.setLife(grandma.getLife()-10)
             enemy.draw(WIN)
 
         for bullet in bullets:
