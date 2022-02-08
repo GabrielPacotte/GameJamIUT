@@ -23,12 +23,26 @@ class GrandMa:
         return self.point
 
     def inHitBox(self, point: Point) -> bool:
-        if self.getpoint().getx() <= point.getx() <= self.getpoint().getx() + 100 and self.getpoint().gety() <= point.gety() <= self.getpoint().gety() + 100:
+        if self.getPoint().getx() <= point.getx() <= self.getPoint().getx() + 100 \
+                and self.getPoint().gety() <= point.gety() <= self.getPoint().gety() + 100:
             return True
         else:
             return False
 
-    def drawGrandma(self, window):
-        MONSTRE_IMG = pygame.image.load("img/grandma.png")
-        MONSTRE_IMG = pygame.transform.scale(MONSTRE_IMG, (100, 100))
-        window.blit(MONSTRE_IMG, (self.point.x, self.point.y))
+    def inHitBoxBullet(self, point: Point) -> bool:
+        point2 = Point(point.getx()+10, point.gety())
+        point3 = Point(point.getx(), point.gety()+10)
+        point4 = Point(point.getx()+10, point.gety()+10)
+
+        if self.inHitBox(point) or self.inHitBox(point2) or self.inHitBox(point3) or self.inHitBox(point4):
+            return True
+        else:
+            return False
+
+    def drawGrandma(self, window, bool):
+        GRANDMA_IMG = pygame.image.load("img/grandma.png")
+        GRANDMA_IMG = pygame.transform.scale(GRANDMA_IMG, (100, 100))
+        if bool:
+            GRANDMA_IMG = pygame.transform.flip(GRANDMA_IMG, True, True)
+
+        window.blit(GRANDMA_IMG, (self.point.x, self.point.y))
