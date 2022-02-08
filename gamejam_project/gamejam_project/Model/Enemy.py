@@ -19,21 +19,21 @@ class Enemy:
     def randomEnemySpawn(window, enemiesList):
         Enemy.timer -= 0.1
         if Enemy.timer <= 0:
-            x = 0
-            y = 0
+            x = -48
+            y = -32
             side = random.randint(0,4)
             if side >= 3: # Spawn on top
                 x = random.randint(0, 1024)
             elif side >= 2: # spawn on bottom
                 x = random.randint(0, 1024)
-                y = 678
+                y = 710
             elif side >= 1: # spawn on left
                 y = random.randint(0, 678)
             else: # spawn on right
-                x = 1024
+                x = 1072
                 y = random.randint(0, 678)
             Enemy.timer = 20
-            enemiesList.append(Enemy(1, 1, Enemy.SLIME, Point(x, y), Point(512, 384), 10))
+            enemiesList.append(Enemy(1, random.random() * 3, Enemy.SLIME, Point(x, y), Point(512, 384), 10))
 
 
 
