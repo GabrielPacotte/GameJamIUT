@@ -33,6 +33,13 @@ class Enemy:
         self.point.y += self.yVel
         window.blit(self.currentSprite, (self.point.x, self.point.y))
 
+    def inHitBox(self, point: Point) -> bool:
+        if self.point.getx() <= point.getx() <= self.point.getx() + 48 \
+                and self.point.gety() <= point.gety() <= self.point.gety() + 32:
+            return True
+        else:
+            return False
+
     def inHitBoxBullet(self, point: Point) -> bool:
         point2 = Point(point.getx() + 10, point.gety())
         point3 = Point(point.getx(), point.gety() + 10)

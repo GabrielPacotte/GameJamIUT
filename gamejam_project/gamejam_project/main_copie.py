@@ -94,6 +94,10 @@ if __name__ == '__main__':
 
         # draw enemies
         for enemy in enemies:
+            for bullet in bullets:
+                if enemy.inHitBoxBullet(bullet.point):
+                    enemies.remove(enemy)
+                    bullets.remove(bullet)
             enemy.draw(WIN)
 
         for bullet in bullets:
