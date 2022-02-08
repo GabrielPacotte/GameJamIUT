@@ -16,7 +16,7 @@ class GrandMa:
     def getLife(self) -> str:
         return self.life
 
-    def setenergy(self, valeur):
+    def setLife(self, valeur):
         self.life = valeur
 
     def getPoint(self) -> Point:
