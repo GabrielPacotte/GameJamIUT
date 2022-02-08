@@ -50,6 +50,16 @@ class Player:
             yMovement /= 1.5
         self.point.x += xMovement
         self.point.y += yMovement
+
+        if self.point.x >= 800:
+            self.point.x = -42
+        elif self.point.x <= -42:
+            self.point.x = 800
+
+        if self.point.y >= 663:
+            self.point.y = -63
+        elif self.point.y <= -63:
+            self.point.y = 663
         self.animate()
 
     # Used to animate the player
