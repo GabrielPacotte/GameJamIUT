@@ -44,6 +44,7 @@ if __name__ == '__main__':
 
     clock = pygame.time.Clock()
     score = 0
+    perdu = False
     while True:
         clock.tick(60)
         time = pygame.time.get_ticks() - time_Before
@@ -63,13 +64,21 @@ if __name__ == '__main__':
 
         for fruit in fruits:
             fruit.drawFruit(WIN)
+        # Draw reverse grandma if you shot her with bullet
+        if not perdu:
+            grandma.drawGrandma(WIN, False)
+        else:
+            grandma.drawGrandma(WIN, True)
 
         for bullet in bullets:
             bullet.draw(WIN)
             if(bullet.lifetime <= 0):
                 bullets.pop(bullets.index(bullet))
+            if grandma.inHitBoxBullet(bullet.point):
+                grandma.drawGrandma(WIN, True)
+                perdu = True
+
         player.draw(WIN)
-        grandma.drawGrandma(WIN)
         for fruit in fruits:
             if fruit.inHitBoxPlayer(player.point):
                 fruits.remove(fruit)
