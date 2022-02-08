@@ -16,11 +16,11 @@ class Cycle:
             self.day = True
             self.night = False
 
-    def getCycle(self) ->str:
+    def getCycle(self) -> str:
         if self.day:
             return "day"
         else:
             return "night"
 
-    def isCycle(self, cycle) ->bool:
+    def isCycle(self, cycle) -> bool:
         return cycle == "day" and self.day or cycle == "night" and self.night

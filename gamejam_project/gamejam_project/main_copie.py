@@ -9,6 +9,7 @@ from Model.Player import Player
 from Model.Point import Point
 from Model.fruit import Fruit
 from Model.GrandMa import GrandMa
+from Model.Cycle import Cycle
 
 pygame.init()
 
@@ -18,6 +19,11 @@ WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 CURSOR = pygame.image.load("img/cursor.png")
 pygame.mouse.set_visible(False)  # hide the cursor
 
+# cycle
+cycle = Cycle(True, False)
+time_cycle_before = pygame.time.get_ticks()
+time_cycle = pygame.time.get_ticks()
+
 # Images
 grass_img = pygame.image.load("img/grass.png")
 
@@ -26,7 +32,6 @@ player = Player("Gab", 3, Point(100, 100), [])
 grandma = GrandMa("mamie", 100, Point(450, 334))
 # Fruits
 time_Before = pygame.time.get_ticks()
-
 newFruitX = random.randint(0, 1004)
 newFruitY = random.randint(0, 748)
 fruits = [Fruit("fruit", 1, Point(newFruitX, newFruitY))]
@@ -54,16 +59,33 @@ if __name__ == '__main__':
         time = pygame.time.get_ticks() - time_Before
         # Update player position
         player.move()
+        # CYCLE DE NUIT ------------------------------------------------------------------------------------------------
+        if cycle.getCycle() == "night":
+
+            Enemy.randomEnemySpawn(WIN, enemies)
+            time_cycle = pygame.time.get_ticks() - time_cycle_before
+            if time_cycle > 20000:
+                print("caca")
+                time_cycle_before = pygame.time.get_ticks()
+                cycle.cycleChange()
+
+        # CYCLE DE JOUR ------------------------------------------------------------------------------------------------
+        if cycle.getCycle() == "day":
+            # Create new fruits
+            if time > 2000:
+                fruits.append(Fruit("fruit", 1, Point(random.randint(0, 1004), random.randint(0, 748))))
+                time_Before = pygame.time.get_ticks()
+            time_cycle = pygame.time.get_ticks() - time_cycle_before
+            if time_cycle > 20000:
+                time_cycle_before = pygame.time.get_ticks()
+                cycle.cycleChange()
+                print("pipi")
+
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     bullets.append(Bullet(Point(player.point.x + 21, player.point.y + 31),
-                                          Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
-        # Create new fruits
-        if time > 2000:
-            fruits.append(Fruit("fruit", 1, Point(random.randint(0, 1004), random.randint(0, 748))))
-            time_Before = pygame.time.get_ticks()
-
+                                              Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
         # Draw the window
         WIN.blit(grass_img, (0, 0))
 
@@ -102,9 +124,12 @@ if __name__ == '__main__':
                 bullets.pop(bullets.index(bullet))
 
             if grandma.inHitBoxBullet(bullet.point):
-                grandma.drawGrandma(WIN, True)
+                grandma.drawGrandma(WIN, False)
                 bullets.remove(bullet)
-                perdu = True
+                grandma.setLife(grandma.getLife()-10)
+
+        if grandma.getLife() <= 0:
+            perdu = True
 
         player.draw(WIN)
         for fruit in fruits:
