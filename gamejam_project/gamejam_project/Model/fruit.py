@@ -14,17 +14,23 @@ class Fruit:
             self.FRUITS_IMG = pygame.image.load("img/fruits/citron.png")
             self.FRUITS_IMG = pygame.transform.scale(self.FRUITS_IMG, (20, 20))
             self.setEnergy(1)
+            self.setName("lemon")
         if 5 < x <= 8:
             self.FRUITS_IMG = pygame.image.load("img/fruits/pomme.png")
             self.FRUITS_IMG = pygame.transform.scale(self.FRUITS_IMG, (20, 20))
             self.setEnergy(2)
+            self.setName("apple")
         if x > 8:
             self.FRUITS_IMG = pygame.image.load("img/fruits/banane.png")
             self.FRUITS_IMG = pygame.transform.scale(self.FRUITS_IMG, (20, 20))
             self.setEnergy(3)
+            self.setName("banana")
 
     def getname(self) -> str:
         return self.name
+
+    def setName(self, name):
+        self.name = name
 
     def getEnergy(self) -> str:
         return self.energy
