@@ -4,10 +4,12 @@ import random
 import pygame
 
 from Model.Bullet import Bullet
+from Model.Enemy import Enemy
 from Model.Player import Player
 from Model.Point import Point
 from Model.fruit import Fruit
 from Model.GrandMa import GrandMa
+
 pygame.init()
 
 # Window settings
@@ -21,7 +23,7 @@ grass_img = pygame.image.load("img/bg_grass.png")
 
 # First instances
 player = Player("Gab", 3, Point(100, 100))
-grandma = GrandMa("mamie", 100, Point(325,225))
+grandma = GrandMa("mamie", 100, Point(325, 225))
 # Fruits
 time_Before = pygame.time.get_ticks()
 
@@ -31,7 +33,12 @@ fruits = [Fruit("fruit", 1, Point(newFruitX, newFruitY))]
 
 # Balles
 
-bullets = [];
+bullets = []
+
+# Enemies
+
+enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(400, 300))]
+
 
 def drawGrass():
     for i in range(0, 475):
@@ -52,7 +59,8 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    bullets.append(Bullet(Point(player.point.x+21, player.point.y+31), Point(pygame.mouse.get_pos()[0],pygame.mouse.get_pos()[1])))
+                    bullets.append(Bullet(Point(player.point.x + 21, player.point.y + 31),
+                                          Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
         # Create new fruits
         if time > 2000:
             fruits.append(Fruit("fruit", 1, Point(random.randint(0, 780), random.randint(0, 580))))
@@ -64,10 +72,14 @@ if __name__ == '__main__':
         for fruit in fruits:
             fruit.drawFruit(WIN)
 
+        for enemy in enemies:
+            enemy.draw(WIN)
+
         for bullet in bullets:
             bullet.draw(WIN)
-            if(bullet.lifetime <= 0):
+            if (bullet.lifetime <= 0):
                 bullets.pop(bullets.index(bullet))
+
         player.draw(WIN)
         grandma.drawGrandma(WIN)
         for fruit in fruits:
@@ -80,7 +92,7 @@ if __name__ == '__main__':
                 fruit.drawFruit(WIN)
 
         font = pygame.font.Font(None, 24)
-        text = font.render("score : "+str(score), 1, (255, 255, 255))
+        text = font.render("score : " + str(score), 1, (255, 255, 255))
         WIN.blit(text, (10, 10))
 
         coord = pygame.mouse.get_pos()
