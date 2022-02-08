@@ -19,7 +19,7 @@ CURSOR = pygame.image.load("img/cursor.png")
 pygame.mouse.set_visible(False)  # hide the cursor
 
 # Images
-grass_img = pygame.image.load("img/bg_grass.png")
+grass_img = pygame.image.load("img/grass.png")
 
 # First instances
 player = Player("Gab", 3, Point(100, 100), [])
@@ -44,13 +44,6 @@ nbBanana = 0
 nbApple = 0
 nbLemon = 0
 
-def drawGrass():
-    for i in range(0, 768):
-        x = i % 32
-        y = (i - x) / 32
-        WIN.blit(grass_img, (x * 32, y * 32))
-
-
 if __name__ == '__main__':
 
     clock = pygame.time.Clock()
@@ -72,7 +65,7 @@ if __name__ == '__main__':
             time_Before = pygame.time.get_ticks()
 
         # Draw the window
-        drawGrass()
+        WIN.blit(grass_img, (0, 0))
 
         for fruit in fruits:
             fruit.drawFruit(WIN)
