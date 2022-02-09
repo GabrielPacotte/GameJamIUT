@@ -43,11 +43,11 @@ class Player:
         self.inventory = []
 
     # Used to move the player thanks to arrow keys
-    def move(self):
+    def move(self, dt):
         keys = pygame.key.get_pressed()
-        xMovement = (keys[pygame.K_d] - keys[pygame.K_q]) * self.moveSpeed
-        yMovement = (keys[pygame.K_s] - keys[pygame.K_z]) * self.moveSpeed
-        if xMovement**2 + yMovement**2 > self.moveSpeed**2:  # Because the player move faster diagonally
+        xMovement = (keys[pygame.K_d] - keys[pygame.K_q]) * self.moveSpeed * dt / 20
+        yMovement = (keys[pygame.K_s] - keys[pygame.K_z]) * self.moveSpeed * dt / 20
+        if xMovement**2 + yMovement**2 > (self.moveSpeed*dt/20)**2:  # Because the player move faster diagonally
             xMovement /= 1.5
             yMovement /= 1.5
         self.point.x += xMovement

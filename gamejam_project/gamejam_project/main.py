@@ -100,10 +100,10 @@ if __name__ == '__main__':
         while restart:
 
             while not perdu:
-                clock.tick(60)
+                dt = clock.tick(60)
                 time = pygame.time.get_ticks() - time_Before
                 # Update player position
-                player.move()
+                player.move(dt)
                 # NIGHT'S CYCLE ------------------------------------------------------------------------------------------------
                 if cycle.getCycle() == "night":
 
