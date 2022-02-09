@@ -254,6 +254,8 @@ if __name__ == '__main__':
                 enemies.clear()
                 fruits.clear()
                 bullets.clear()
+                cycle.day = True
+                cycle.night = False
 
             if keys[pygame.K_e]:  # q pressed (for exit)
                 perdu = False
