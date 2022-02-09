@@ -276,6 +276,8 @@ if __name__ == '__main__':
                 enemies.clear()
                 fruits.clear()
                 bullets.clear()
+                cycle.day = True
+                cycle.night = False
 
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:  # r pressed (for restart)
