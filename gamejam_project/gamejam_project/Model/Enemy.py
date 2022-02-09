@@ -15,27 +15,26 @@ for i in range(1, 3):
 class Enemy:
     SLIME = 1
     timer = 20
+
     @staticmethod
-    def randomEnemySpawn(window, enemiesList):
+    def randomEnemySpawn(window, enemiesList, compteur_cycle):
         Enemy.timer -= 0.1
         if Enemy.timer <= 0:
             x = -48
             y = -32
-            side = random.randint(0,4)
-            if side >= 3: # Spawn on top
+            side = random.randint(0, 4)
+            if side >= 3:  # Spawn on top
                 x = random.randint(0, 1024)
-            elif side >= 2: # spawn on bottom
+            elif side >= 2:  # spawn on bottom
                 x = random.randint(0, 1024)
                 y = 710
-            elif side >= 1: # spawn on left
+            elif side >= 1:  # spawn on left
                 y = random.randint(0, 678)
-            else: # spawn on right
+            else:  # spawn on right
                 x = 1072
                 y = random.randint(0, 678)
-            Enemy.timer = random.random() * 20
+            Enemy.timer = random.random() * 20 / compteur_cycle
             enemiesList.append(Enemy(1, random.random() * 3, Enemy.SLIME, Point(x, y), Point(512, 384), 10))
-
-
 
     def __init__(self, hp, moveSpeed, type, point: Point, target: Point, damages):
         self.hp = hp
