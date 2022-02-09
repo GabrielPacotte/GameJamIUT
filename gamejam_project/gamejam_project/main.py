@@ -49,6 +49,18 @@ nbBanana = 0
 nbApple = 0
 nbLemon = 0
 
+def animCycleAnouncement(imgName):
+    night_img = pygame.image.load(imgName)
+    pygame.image.save(WIN, 'img/temp.png')
+    temp = pygame.image.load('img/temp.png')
+    x = -1024
+    while x < 1024:
+        # Draw the world
+        WIN.blit(temp, (0,0))
+        WIN.blit(night_img, (x, 0))
+        pygame.display.update()
+        x += 5
+
 if __name__ == '__main__':
 
     clock = pygame.time.Clock()
@@ -69,11 +81,7 @@ if __name__ == '__main__':
                 time_cycle_before = pygame.time.get_ticks()
                 cycle.cycleChange()
                 compteur_cycle = compteur_cycle + 1
-                grass_img = pygame.image.load("img/day.png")
-                WIN.blit(grass_img, (0, 0))
-                pygame.display.update()
-                pygame.time.wait(1000)
-                grass_img = pygame.image.load("img/grass.png")
+                animCycleAnouncement('img/day.png')
 
             font = pygame.font.Font(None, 24)
             text = font.render("nuit "+str(compteur_cycle), 1, (255, 255, 255))
@@ -90,11 +98,7 @@ if __name__ == '__main__':
             if time_cycle > 20000:
                 time_cycle_before = pygame.time.get_ticks()
                 cycle.cycleChange()
-                grass_img = pygame.image.load("img/night.png")
-                WIN.blit(grass_img, (0, 0))
-                pygame.display.update()
-                pygame.time.wait(1000)
-                grass_img = pygame.image.load("img/grass.png")
+                animCycleAnouncement('img/night.png')
 
             font = pygame.font.Font(None, 24)
             text = font.render("jour "+str(compteur_cycle), 1, (255, 255, 255))
