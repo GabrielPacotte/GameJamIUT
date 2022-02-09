@@ -51,6 +51,8 @@ nbBanana = 0
 nbApple = 0
 nbLemon = 0
 
+darkness = 0
+
 
 def animCycleAnouncement(imgName):
     night_img = pygame.image.load(imgName)
@@ -195,11 +197,20 @@ if __name__ == '__main__':
         WIN.blit(text, (10, 10))
 
         if cycle.getCycle() == "night":
+            if darkness < 100:
+                darkness += 1
             PURPLE = (255, 0, 255)
             purple_image = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
-            purple_image.set_alpha(100)
+            purple_image.set_alpha(darkness)
             WIN.blit(purple_image, (0, 0))
-
+        else: # cycle = day
+            if darkness > 0:
+                darkness -= 1
+                PURPLE = (255, 0, 255)
+                purple_image = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
+                purple_image.set_alpha(darkness)
+                WIN.blit(purple_image, (0, 0))
+                
         coord = pygame.mouse.get_pos()
         WIN.blit(CURSOR, coord)
         pygame.display.update()
