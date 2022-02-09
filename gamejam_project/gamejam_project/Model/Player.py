@@ -69,22 +69,22 @@ class Player:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_s]:  # Animate down movement
             self.player_img = moveDownSprites[int(self.currentSprite)]
-            self.currentSprite += 0.15
+            self.currentSprite += 0.2
             if self.currentSprite >= len(moveDownSprites):
                 self.currentSprite = 0
         elif keys[pygame.K_z]:  # Animate up movement
             self.player_img = moveUpSprites[int(self.currentSprite)]
-            self.currentSprite += 0.15
+            self.currentSprite += 0.2
             if self.currentSprite >= len(moveUpSprites):
                 self.currentSprite = 0
         elif keys[pygame.K_q]:  # Animate movement on left
             self.player_img = moveLeftSprites[int(self.currentSprite)]
-            self.currentSprite += 0.15
+            self.currentSprite += 0.2
             if self.currentSprite >= len(moveLeftSprites):
                 self.currentSprite = 0
         elif keys[pygame.K_d]:  # Animate movement on right
             self.player_img = moveRightSprites[int(self.currentSprite)]
-            self.currentSprite += 0.15
+            self.currentSprite += 0.2
             if self.currentSprite >= len(moveRightSprites):
                 self.currentSprite = 0
         else:  # Else stay idle
