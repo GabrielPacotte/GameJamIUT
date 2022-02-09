@@ -113,6 +113,8 @@ if __name__ == '__main__':
         while restart:
             music_theme.stop()
             music_quest.play()
+            time_cycle_before = pygame.time.get_ticks()
+            time_cycle = pygame.time.get_ticks()
             while not perdu:
                 dt = clock.tick(60)
                 time = pygame.time.get_ticks() - time_Before
@@ -284,7 +286,7 @@ if __name__ == '__main__':
                 text_score = font.render("Score: " + str(score), 1, (255, 255, 255))
                 font = pygame.font.Font('fonts/dogica.ttf', 10)
                 text_play_again = font.render("Press r to play again", 1, (255, 255, 255))
-                text_quit = font.render("Press e to exit", 1, (255, 255, 255))
+                text_quit = font.render("Press e to menu", 1, (255, 255, 255))
 
                 WIN.blit(text, (80, 150))
                 WIN.blit(text_score, (430, 460))
@@ -293,32 +295,50 @@ if __name__ == '__main__':
                     WIN.blit(text_quit, (430, 520))
                 timer += 0.05
 
-                grandma.setLife(100)
-                score = 0
-                compteur_cycle = 1
-                time_cycle_before = pygame.time.get_ticks()
-                time_cycle = pygame.time.get_ticks()
-                time_Before = pygame.time.get_ticks()
-                nbBanana = 0
-                nbApple = 0
-                nbLemon = 0
-                darkness = 0
-                player.inventory.clear()
-                enemies.clear()
-                fruits.clear()
-                bullets.clear()
-                cycle.day = True
-                cycle.night = False
-
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_r]:  # r pressed (for restart)
                     perdu = False
                     restart = True
+                    grandma.setLife(100)
+                    score = 0
+                    compteur_cycle = 1
+                    time_cycle_before = pygame.time.get_ticks()
+                    time_cycle = pygame.time.get_ticks()
+                    time_Before = pygame.time.get_ticks()
+                    nbBanana = 0
+                    nbApple = 0
+                    nbLemon = 0
+                    darkness = 0
+                    player.inventory.clear()
+                    enemies.clear()
+                    fruits.clear()
+                    bullets.clear()
+                    cycle.day = True
+                    cycle.night = False
+                    player.setPoint(Point(100,100))
 
                 if keys[pygame.K_e]:  # q pressed (for exit)
                     perdu = False
                     restart = False
                     waitUserResponse = True
+                    grandma.setLife(100)
+                    score = 0
+                    compteur_cycle = 1
+                    time_cycle_before = pygame.time.get_ticks()
+                    time_cycle = pygame.time.get_ticks()
+                    time_Before = pygame.time.get_ticks()
+                    nbBanana = 0
+                    nbApple = 0
+                    nbLemon = 0
+                    darkness = 0
+                    player.inventory.clear()
+                    enemies.clear()
+                    fruits.clear()
+                    bullets.clear()
+                    cycle.day = True
+                    cycle.night = False
+                    player.setPoint(Point(100,100))
 
                 pygame.display.update()
                 pygame.event.pump()
+
