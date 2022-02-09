@@ -1,7 +1,7 @@
 # Main file
 import random
 
-import pygame
+import pygame, sys
 
 from Model.Bullet import Bullet
 from Model.Enemy import Enemy
@@ -12,6 +12,8 @@ from Model.GrandMa import GrandMa
 from Model.Cycle import Cycle
 
 pygame.init()
+pygame.mixer.init()
+
 
 # Window settings
 WIN_WIDTH, WIN_HEIGHT = 1024, 768
@@ -49,6 +51,11 @@ nbBanana = 0
 nbApple = 0
 nbLemon = 0
 
+# sound
+sound_1 = pygame.mixer.Sound("sound/briut1.ogg")
+sound_kalash = pygame.mixer.Sound("sound/bruit_kalash.ogg")
+
+
 darkness = 0
 
 
@@ -72,6 +79,7 @@ if __name__ == '__main__':
     perdu = False
     compteur_cycle = 1
     restart = True
+    tir = False
     while restart:
         while not perdu:
             clock.tick(60)
@@ -114,6 +122,9 @@ if __name__ == '__main__':
                     if event.button == 1:
                         bullets.append(Bullet(Point(player.point.x + 21, player.point.y + 31),
                                               Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
+                        sound_kalash.play()
+                        pygame.display.flip()
+
             # Draw the window
             WIN.blit(grass_img, (0, 0))
             WIN.blit(text, (10, 30))
@@ -156,9 +167,15 @@ if __name__ == '__main__':
                     grandma.drawGrandma(WIN, False)
                     bullets.remove(bullet)
                     grandma.setLife(grandma.getLife() - 10)
+                    tir = True
 
             if grandma.getLife() <= 0:
                 perdu = True
+
+            if tir:
+                sound_1.play()
+                pygame.display.flip()
+                tir = False
 
             player.draw(WIN)
             for fruit in fruits:
@@ -254,6 +271,8 @@ if __name__ == '__main__':
                 enemies.clear()
                 fruits.clear()
                 bullets.clear()
+                cycle.day = True
+                cycle.night = False
 
             if keys[pygame.K_e]:  # q pressed (for exit)
                 perdu = False
