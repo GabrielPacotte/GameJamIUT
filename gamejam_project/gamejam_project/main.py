@@ -51,6 +51,9 @@ nbApple = 0
 nbLemon = 0
 
 # sound
+music_theme = pygame.mixer.Sound("sound/theme.ogg")
+music_theme.set_volume(0.5)
+music_quest = pygame.mixer.Sound("sound/quest.ogg")
 sound_1 = pygame.mixer.Sound("sound/briut1.ogg")
 sound_kalash = pygame.mixer.Sound("sound/bruit_kalash.ogg")
 sound_fruits = pygame.mixer.Sound("sound/bruit_fruit.ogg")
@@ -86,6 +89,7 @@ if __name__ == '__main__':
     running = True
     while running:
         while waitUserResponse:
+            music_theme.play()
             WIN.fill((0, 0, 0))
             if int(timer) % 2 == 1:
                 font = pygame.font.Font('fonts/dogica.ttf', 10)
@@ -96,16 +100,19 @@ if __name__ == '__main__':
             timer += 0.005
             pygame.display.update()
             keys = pygame.key.get_pressed()
+            pygame.display.flip()
             pygame.event.pump()
             if keys[pygame.K_RETURN]:
                 waitUserResponse = False
                 restart = True
+                timer = 0
             if keys[pygame.K_BACKSPACE]:
                 waitUserResponse = False
                 restart = False
                 running = False
         while restart:
-
+            music_theme.stop()
+            music_quest.play()
             while not perdu:
                 dt = clock.tick(60)
                 time = pygame.time.get_ticks() - time_Before
@@ -261,6 +268,7 @@ if __name__ == '__main__':
                 pygame.event.pump()
 
             while perdu:
+                music_quest.stop()
                 WIN.blit(grass_img, (0, 0))
 
                 for fruit in fruits:
@@ -272,12 +280,18 @@ if __name__ == '__main__':
 
                 font = pygame.font.Font('fonts/dogica.ttf', 100)
                 text = font.render("GAME OVER", 1, (255, 255, 255))
+                font = pygame.font.Font('fonts/dogica.ttf', 20)
+                text_score = font.render("Score: " + str(score), 1, (255, 255, 255))
                 font = pygame.font.Font('fonts/dogica.ttf', 10)
                 text_play_again = font.render("Press r to play again", 1, (255, 255, 255))
                 text_quit = font.render("Press e to exit", 1, (255, 255, 255))
+
                 WIN.blit(text, (80, 150))
-                WIN.blit(text_play_again, (400, 500))
-                WIN.blit(text_quit, (430, 520))
+                WIN.blit(text_score, (430, 460))
+                if int(timer) % 2 == 1:
+                    WIN.blit(text_play_again, (400, 500))
+                    WIN.blit(text_quit, (430, 520))
+                timer += 0.05
 
                 grandma.setLife(100)
                 score = 0
