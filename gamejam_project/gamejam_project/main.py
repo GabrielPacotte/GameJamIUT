@@ -42,9 +42,7 @@ bullets = []
 
 # Enemies
 
-enemies = [Enemy(1, 1, Enemy.SLIME, Point(0, 0), Point(512, 384), 10),
-           Enemy(1, 1, Enemy.SLIME, Point(0, 768), Point(512, 384), 10),
-           Enemy(1, 1, Enemy.SLIME, Point(1000, 768), Point(512, 384), 10)]
+enemies = []
 
 # nbFruits
 nbBanana = 0
@@ -81,7 +79,7 @@ if __name__ == '__main__':
         # NIGHT'S CYCLE ------------------------------------------------------------------------------------------------
         if cycle.getCycle() == "night":
 
-            Enemy.randomEnemySpawn(WIN, enemies)
+            Enemy.randomEnemySpawn(WIN, enemies, compteur_cycle)
             time_cycle = pygame.time.get_ticks() - time_cycle_before
             if time_cycle > 20000:
                 time_cycle_before = pygame.time.get_ticks()
@@ -141,6 +139,7 @@ if __name__ == '__main__':
                 if enemy.inHitBoxBullet(bullet.point):
                     enemies.remove(enemy)
                     bullets.remove(bullet)
+                    score += 1
             if grandma.inHitBoxEnemy(enemy.point):
                 enemies.remove(enemy)
                 grandma.setLife(grandma.getLife() - 10)
@@ -203,14 +202,14 @@ if __name__ == '__main__':
             purple_image = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
             purple_image.set_alpha(darkness)
             WIN.blit(purple_image, (0, 0))
-        else: # cycle = day
+        else:  # cycle = day
             if darkness > 0:
                 darkness -= 1
                 PURPLE = (255, 0, 255)
                 purple_image = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
                 purple_image.set_alpha(darkness)
                 WIN.blit(purple_image, (0, 0))
-                
+
         coord = pygame.mouse.get_pos()
         WIN.blit(CURSOR, coord)
         pygame.display.update()
