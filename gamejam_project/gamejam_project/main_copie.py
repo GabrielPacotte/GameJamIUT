@@ -54,6 +54,9 @@ nbLemon = 0
 # sound
 sound_1 = pygame.mixer.Sound("sound/briut1.ogg")
 sound_kalash = pygame.mixer.Sound("sound/bruit_kalash.ogg")
+sound_fruits = pygame.mixer.Sound("sound/bruit_fruit.ogg")
+sound_grandma = pygame.mixer.Sound("sound/bruit_grandmere.mp3")
+sound_end = pygame.mixer.Sound("sound/bruit_fin.mp3")
 
 
 darkness = 0
@@ -82,10 +85,10 @@ if __name__ == '__main__':
     tir = False
     while restart:
         while not perdu:
-            clock.tick(60)
+            dt = clock.tick(60)
             time = pygame.time.get_ticks() - time_Before
             # Update player position
-            player.move()
+            player.move(dt)
             # NIGHT'S CYCLE ------------------------------------------------------------------------------------------------
             if cycle.getCycle() == "night":
 
@@ -123,7 +126,6 @@ if __name__ == '__main__':
                         bullets.append(Bullet(Point(player.point.x + 21, player.point.y + 31),
                                               Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
                         sound_kalash.play()
-                        pygame.display.flip()
 
             # Draw the window
             WIN.blit(grass_img, (0, 0))
@@ -171,10 +173,10 @@ if __name__ == '__main__':
 
             if grandma.getLife() <= 0:
                 perdu = True
+                sound_end.play()
 
             if tir:
                 sound_1.play()
-                pygame.display.flip()
                 tir = False
 
             player.draw(WIN)
@@ -188,6 +190,7 @@ if __name__ == '__main__':
                         else:
                             nbApple = nbApple + 1
                         fruits.remove(fruit)
+                        sound_fruits.play()
                     else:
                         fruit.drawFruit(WIN)
                 elif fruit.inHitBoxGrandma(grandma.point):
@@ -198,6 +201,8 @@ if __name__ == '__main__':
             # Feed the gandma
             if grandma.inHitBoxPlayer(player.point):
                 count = 0
+                if len(player.inventory) != 0:
+                    sound_grandma.play()
                 for fruit in player.inventory:
                     count = count + fruit.getEnergy()
                     score = score + fruit.getEnergy()
@@ -231,6 +236,7 @@ if __name__ == '__main__':
 
             coord = pygame.mouse.get_pos()
             WIN.blit(CURSOR, coord)
+            pygame.display.flip()
             pygame.display.update()
             pygame.event.pump()
 

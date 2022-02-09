@@ -12,6 +12,7 @@ from Model.GrandMa import GrandMa
 from Model.Cycle import Cycle
 
 pygame.init()
+pygame.mixer.init()
 
 # Window settings
 WIN_WIDTH, WIN_HEIGHT = 1024, 768
@@ -48,6 +49,14 @@ enemies = []
 nbBanana = 0
 nbApple = 0
 nbLemon = 0
+
+# sound
+sound_1 = pygame.mixer.Sound("sound/briut1.ogg")
+sound_kalash = pygame.mixer.Sound("sound/bruit_kalash.ogg")
+sound_fruits = pygame.mixer.Sound("sound/bruit_fruit.ogg")
+sound_grandma = pygame.mixer.Sound("sound/bruit_grandmere.mp3")
+sound_end = pygame.mixer.Sound("sound/bruit_fin.mp3")
+sound_enemy = pygame.mixer.Sound("sound/bruit_ennemi.mp3")
 
 darkness = 0
 
@@ -89,11 +98,9 @@ if __name__ == '__main__':
             keys = pygame.key.get_pressed()
             pygame.event.pump()
             if keys[pygame.K_RETURN]:
-                print("HAAAAANN")
                 waitUserResponse = False
                 restart = True
             if keys[pygame.K_BACKSPACE]:
-                print("HAAAAANN")
                 waitUserResponse = False
                 restart = False
                 running = False
@@ -140,6 +147,8 @@ if __name__ == '__main__':
                         if event.button == 1:
                             bullets.append(Bullet(Point(player.point.x + 21, player.point.y + 31),
                                                   Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
+                            sound_kalash.play()
+
                 # Draw the window
                 WIN.blit(grass_img, (0, 0))
                 WIN.blit(text, (10, 30))
@@ -168,9 +177,11 @@ if __name__ == '__main__':
                             enemies.remove(enemy)
                             bullets.remove(bullet)
                             score += 1
+                            sound_enemy.play()
                     if grandma.inHitBoxEnemy(enemy.point):
                         enemies.remove(enemy)
                         grandma.setLife(grandma.getLife() - 10)
+                        sound_1.play()
                     enemy.draw(WIN)
 
                 for bullet in bullets:
@@ -182,9 +193,11 @@ if __name__ == '__main__':
                         grandma.drawGrandma(WIN, False)
                         bullets.remove(bullet)
                         grandma.setLife(grandma.getLife() - 10)
+                        sound_1.play()
 
                 if grandma.getLife() <= 0:
                     perdu = True
+                    sound_end.play()
 
                 player.draw(WIN)
                 for fruit in fruits:
@@ -197,6 +210,7 @@ if __name__ == '__main__':
                             else:
                                 nbApple = nbApple + 1
                             fruits.remove(fruit)
+                            sound_fruits.play()
                         else:
                             fruit.drawFruit(WIN)
                     elif fruit.inHitBoxGrandma(grandma.point):
@@ -207,6 +221,8 @@ if __name__ == '__main__':
                 # Feed the gandma
                 if grandma.inHitBoxPlayer(player.point):
                     count = 0
+                    if len(player.inventory) != 0:
+                        sound_grandma.play()
                     for fruit in player.inventory:
                         count = count + fruit.getEnergy()
                         score = score + fruit.getEnergy()
@@ -240,6 +256,7 @@ if __name__ == '__main__':
 
                 coord = pygame.mouse.get_pos()
                 WIN.blit(CURSOR, coord)
+                pygame.display.flip()
                 pygame.display.update()
                 pygame.event.pump()
 
