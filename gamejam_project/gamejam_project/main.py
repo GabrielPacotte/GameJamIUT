@@ -79,11 +79,11 @@ if __name__ == '__main__':
         while waitUserResponse:
             WIN.fill((0, 0, 0))
             if int(timer) % 2 == 1:
-                font = pygame.font.Font(None, 25)
+                font = pygame.font.Font('fonts/dogica.ttf', 10)
                 text_play_again = font.render("Press ENTER to play", 1, (255, 255, 255))
                 text_quit = font.render("Press DEL to exit", 1, (255, 255, 255))
-                WIN.blit(text_play_again, (450, 350))
-                WIN.blit(text_quit, (465, 380))
+                WIN.blit(text_play_again, (420, 350))
+                WIN.blit(text_quit, (430, 380))
             timer += 0.005
             pygame.display.update()
             keys = pygame.key.get_pressed()
@@ -115,7 +115,7 @@ if __name__ == '__main__':
                         compteur_cycle = compteur_cycle + 1
                         animCycleAnouncement('img/day.png')
 
-                    font = pygame.font.Font(None, 24)
+                    font = pygame.font.Font('fonts/dogica.ttf', 10)
                     text = font.render("nuit " + str(compteur_cycle), 1, (255, 255, 255))
                     WIN.blit(text, (10, 30))
 
@@ -131,7 +131,7 @@ if __name__ == '__main__':
                         cycle.cycleChange()
                         animCycleAnouncement('img/night.png')
 
-                    font = pygame.font.Font(None, 24)
+                    font = pygame.font.Font('fonts/dogica.ttf', 10)
                     text = font.render("jour " + str(compteur_cycle), 1, (255, 255, 255))
                     WIN.blit(text, (10, 30))
 
@@ -217,7 +217,7 @@ if __name__ == '__main__':
                     nbLemon = 0
 
                 # Printing score and inventory
-                font = pygame.font.Font(None, 24)
+                font = pygame.font.Font('fonts/dogica.ttf', 10)
                 text = font.render(
                     "score : " + str(score) + " | banana : " + str(nbBanana) + " | Apple : " + str(nbApple) + " | Lemon : "
                     + str(nbLemon), 1, (255, 255, 255))
@@ -253,14 +253,14 @@ if __name__ == '__main__':
 
                 pygame.draw.rect(WIN, (255, 0, 0), pygame.Rect(450, 314, 100, 10))
 
-                font = pygame.font.Font(None, 200)
+                font = pygame.font.Font('fonts/dogica.ttf', 100)
                 text = font.render("GAME OVER", 1, (255, 255, 255))
-                font = pygame.font.Font(None, 20)
+                font = pygame.font.Font('fonts/dogica.ttf', 10)
                 text_play_again = font.render("Press r to play again", 1, (255, 255, 255))
                 text_quit = font.render("Press e to exit", 1, (255, 255, 255))
                 WIN.blit(text, (80, 150))
-                WIN.blit(text_play_again, (450, 500))
-                WIN.blit(text_quit, (465, 520))
+                WIN.blit(text_play_again, (400, 500))
+                WIN.blit(text_quit, (430, 520))
 
                 grandma.setLife(100)
                 score = 0
