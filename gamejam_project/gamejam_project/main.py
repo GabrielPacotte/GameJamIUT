@@ -42,12 +42,30 @@ bullets = []
 
 # Enemies
 
-enemies = [Enemy(1, 1, Enemy.SLIME, Point(0,0), Point(512, 384), 10), Enemy(1, 1, Enemy.SLIME, Point(0,768), Point(512, 384), 10), Enemy(1, 1, Enemy.SLIME, Point(1000,768), Point(512, 384), 10)]
+enemies = [Enemy(1, 1, Enemy.SLIME, Point(0, 0), Point(512, 384), 10),
+           Enemy(1, 1, Enemy.SLIME, Point(0, 768), Point(512, 384), 10),
+           Enemy(1, 1, Enemy.SLIME, Point(1000, 768), Point(512, 384), 10)]
 
-#nbFruits
+# nbFruits
 nbBanana = 0
 nbApple = 0
 nbLemon = 0
+
+darkness = 0
+
+
+def animCycleAnouncement(imgName):
+    night_img = pygame.image.load(imgName)
+    pygame.image.save(WIN, 'img/temp.png')
+    temp = pygame.image.load('img/temp.png')
+    x = -1024
+    while x < 1024:
+        # Draw the world
+        WIN.blit(temp, (0, 0))
+        WIN.blit(night_img, (x, 0))
+        pygame.display.update()
+        x += 5
+
 
 if __name__ == '__main__':
 
@@ -69,16 +87,11 @@ if __name__ == '__main__':
                 time_cycle_before = pygame.time.get_ticks()
                 cycle.cycleChange()
                 compteur_cycle = compteur_cycle + 1
-                grass_img = pygame.image.load("img/day.png")
-                WIN.blit(grass_img, (0, 0))
-                pygame.display.update()
-                pygame.time.wait(1000)
-                grass_img = pygame.image.load("img/grass.png")
+                animCycleAnouncement('img/day.png')
 
             font = pygame.font.Font(None, 24)
-            text = font.render("nuit "+str(compteur_cycle), 1, (255, 255, 255))
+            text = font.render("nuit " + str(compteur_cycle), 1, (255, 255, 255))
             WIN.blit(text, (10, 30))
-
 
         # DAY'S CYCLE --------------------------------------------------------------------------------------------------
         if cycle.getCycle() == "day":
@@ -90,22 +103,17 @@ if __name__ == '__main__':
             if time_cycle > 20000:
                 time_cycle_before = pygame.time.get_ticks()
                 cycle.cycleChange()
-                grass_img = pygame.image.load("img/night.png")
-                WIN.blit(grass_img, (0, 0))
-                pygame.display.update()
-                pygame.time.wait(1000)
-                grass_img = pygame.image.load("img/grass.png")
+                animCycleAnouncement('img/night.png')
 
             font = pygame.font.Font(None, 24)
-            text = font.render("jour "+str(compteur_cycle), 1, (255, 255, 255))
+            text = font.render("jour " + str(compteur_cycle), 1, (255, 255, 255))
             WIN.blit(text, (10, 30))
-
 
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     bullets.append(Bullet(Point(player.point.x + 21, player.point.y + 31),
-                                              Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
+                                          Point(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])))
         # Draw the window
         WIN.blit(grass_img, (0, 0))
         WIN.blit(text, (10, 30))
@@ -123,7 +131,7 @@ if __name__ == '__main__':
         if not perdu:
             if grandma.getLife() > 200:
                 grandma.setLife(200)
-            pygame.draw.rect(WIN, (0, 255, 0), pygame.Rect(450, 314, grandma.getLife()/2, 10))
+            pygame.draw.rect(WIN, (0, 255, 0), pygame.Rect(450, 314, grandma.getLife() / 2, 10))
         else:
             pygame.draw.rect(WIN, (255, 0, 0), pygame.Rect(450, 314, 100, 10))
 
@@ -135,7 +143,7 @@ if __name__ == '__main__':
                     bullets.remove(bullet)
             if grandma.inHitBoxEnemy(enemy.point):
                 enemies.remove(enemy)
-                grandma.setLife(grandma.getLife()-10)
+                grandma.setLife(grandma.getLife() - 10)
             enemy.draw(WIN)
 
         for bullet in bullets:
@@ -146,7 +154,7 @@ if __name__ == '__main__':
             if grandma.inHitBoxBullet(bullet.point):
                 grandma.drawGrandma(WIN, False)
                 bullets.remove(bullet)
-                grandma.setLife(grandma.getLife()-10)
+                grandma.setLife(grandma.getLife() - 10)
 
         if grandma.getLife() <= 0:
             perdu = True
@@ -183,10 +191,26 @@ if __name__ == '__main__':
 
         # Printing score and inventory
         font = pygame.font.Font(None, 24)
-        text = font.render("score : " + str(score)+" | banana : "+str(nbBanana)+" | Apple : "+str(nbApple)+" | Lemon : "
-                           + str(nbLemon), 1, (255, 255, 255))
+        text = font.render(
+            "score : " + str(score) + " | banana : " + str(nbBanana) + " | Apple : " + str(nbApple) + " | Lemon : "
+            + str(nbLemon), 1, (255, 255, 255))
         WIN.blit(text, (10, 10))
 
+        if cycle.getCycle() == "night":
+            if darkness < 100:
+                darkness += 1
+            PURPLE = (255, 0, 255)
+            purple_image = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
+            purple_image.set_alpha(darkness)
+            WIN.blit(purple_image, (0, 0))
+        else: # cycle = day
+            if darkness > 0:
+                darkness -= 1
+                PURPLE = (255, 0, 255)
+                purple_image = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
+                purple_image.set_alpha(darkness)
+                WIN.blit(purple_image, (0, 0))
+                
         coord = pygame.mouse.get_pos()
         WIN.blit(CURSOR, coord)
         pygame.display.update()
@@ -207,4 +231,3 @@ if __name__ == '__main__':
         WIN.blit(text, (80, 150))
         pygame.display.update()
         pygame.event.pump()
-
