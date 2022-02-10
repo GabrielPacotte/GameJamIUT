@@ -1,5 +1,6 @@
 # Main file
 import random
+import webbrowser
 
 import pygame
 
@@ -89,16 +90,30 @@ if __name__ == '__main__':
     timer = 0
     running = True
     while running:
+        titleSize = 0
         while waitUserResponse:
             music_theme.play(loops=-1, maxtime=0, fade_ms=0)
             WIN.fill((0, 0, 0))
+            if(titleSize < 200):
+                titleSize += 1
+            font = pygame.font.Font('fonts/neon_pixel-7.ttf', titleSize)
+            title = font.render("SUPER MAMIE", 1, (255, 255, 255))
+            WIN.blit(title, (50,100))
+            font = pygame.font.Font('fonts/dogica.ttf', 10)
             if int(timer) % 2 == 1:
-                font = pygame.font.Font('fonts/dogica.ttf', 10)
                 text_play_again = font.render("Press ENTER to play", 1, (255, 255, 255))
                 text_quit = font.render("Press DEL to exit", 1, (255, 255, 255))
+                text_rules = font.render("Press R to see rules", 1, (255, 255, 255))
                 WIN.blit(text_play_again, (420, 350))
-                WIN.blit(text_quit, (430, 380))
+                WIN.blit(text_rules, (420, 380))
+                WIN.blit(text_quit, (430, 410))
             timer += 0.005
+            text_music = font.render("Musics : Double Dragon II: The Revenge", 1, (255, 255, 255))
+            text_font = font.render("Font : Dafont.com - Dogica", 1, (255, 255, 255))
+            text_sprites = font.render("Sprites : HeartBeast and PngAAA.com", 1, (255, 255, 255))
+            WIN.blit(text_music, (10, 710))
+            WIN.blit(text_font, (10, 725))
+            WIN.blit(text_sprites, (10, 740))
             pygame.display.update()
             keys = pygame.key.get_pressed()
             pygame.display.flip()
@@ -107,6 +122,8 @@ if __name__ == '__main__':
                 waitUserResponse = False
                 restart = True
                 timer = 0
+            if keys[pygame.K_r]:
+                webbrowser.open("https://youtube.com")
             if keys[pygame.K_BACKSPACE]:
                 waitUserResponse = False
                 restart = False
