@@ -65,7 +65,6 @@ sound_day = pygame.mixer.Sound("sound/bruit_jour.wav")
 
 darkness = 0
 
-
 def animCycleAnouncement(imgName):
     night_img = pygame.image.load(imgName)
     pygame.image.save(WIN, 'img/temp.png')
@@ -150,7 +149,6 @@ if __name__ == '__main__':
                         cycle.cycleChange()
                         sound_night.play()
                         animCycleAnouncement('img/night.png')
-
                     font = pygame.font.Font('fonts/dogica.ttf', 10)
                     text = font.render("jour " + str(compteur_cycle), 1, (255, 255, 255))
                     WIN.blit(text, (10, 30))
@@ -186,7 +184,7 @@ if __name__ == '__main__':
                 # draw enemies
                 for enemy in enemies:
                     for bullet in bullets:
-                        if enemy.inHitBoxBullet(bullet.point):
+                        if enemy in enemies and enemy.inHitBoxBullet(bullet.point):
                             enemies.remove(enemy)
                             bullets.remove(bullet)
                             score += 1
@@ -228,8 +226,6 @@ if __name__ == '__main__':
                             fruit.drawFruit(WIN)
                     elif fruit.inHitBoxGrandma(grandma.point):
                         fruits.remove(fruit)
-                    else:
-                        fruit.drawFruit(WIN)
 
                 # Feed the gandma
                 if grandma.inHitBoxPlayer(player.point):
@@ -293,7 +289,7 @@ if __name__ == '__main__':
                 text_quit = font.render("Press e to menu", 1, (255, 255, 255))
 
                 WIN.blit(text, (80, 150))
-                WIN.blit(text_score, (430, 460))
+                WIN.blit(text_score, (420, 460))
                 if int(timer) % 2 == 1:
                     WIN.blit(text_play_again, (400, 500))
                     WIN.blit(text_quit, (430, 520))
@@ -345,4 +341,3 @@ if __name__ == '__main__':
 
                 pygame.display.update()
                 pygame.event.pump()
-
