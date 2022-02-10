@@ -30,8 +30,8 @@ class GrandMa:
             return False
 
     def inHitBoxHigher(self, point: Point) -> bool:  # pour déposer les fruits
-        if self.getPoint().getx() <= point.getx() <= self.getPoint().getx() + 80 \
-                and self.getPoint().gety() <= point.gety() <= self.getPoint().gety() + 120:
+        if self.getPoint().getx()-20 <= point.getx() <= self.getPoint().getx() + 80 \
+                and self.getPoint().gety()-20 <= point.gety() <= self.getPoint().gety() + 120:
             return True
         else:
             return False
