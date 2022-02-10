@@ -60,7 +60,7 @@ class Player:
             yMovement = 0
         elif 440 < self.point.x < 530 and 271 < self.point.y + yMovement < 434 and yMovement < 0:
             yMovement = 0
-        
+
         self.point.x += xMovement
         self.point.y += yMovement
         # Constraints on horizontal axis
