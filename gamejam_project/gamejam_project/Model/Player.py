@@ -50,6 +50,17 @@ class Player:
         if xMovement**2 + yMovement**2 > self.moveSpeed**2:  # Because the player move faster diagonally
             xMovement /= 1.5
             yMovement /= 1.5
+
+        # Collisions with grandma (470, 334, 60, 100
+        if 440 < self.point.x + xMovement < 530 and 271 < self.point.y < 434 and xMovement > 0:
+            xMovement = 0
+        elif 440 < self.point.x + xMovement < 530 and 271 < self.point.y < 434 and xMovement < 0:
+            xMovement = 0
+        if 440 < self.point.x < 530 and 271 < self.point.y + yMovement < 434 and yMovement > 0:
+            yMovement = 0
+        elif 440 < self.point.x < 530 and 271 < self.point.y + yMovement < 434 and yMovement < 0:
+            yMovement = 0
+
         self.point.x += xMovement
         self.point.y += yMovement
         # Constraints on horizontal axis
