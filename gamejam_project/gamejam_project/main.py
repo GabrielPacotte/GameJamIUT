@@ -123,7 +123,7 @@ if __name__ == '__main__':
                 restart = True
                 timer = 0
             if keys[pygame.K_r]:
-                webbrowser.open("https://youtube.com")
+                webbrowser.open("https://github.com/PacGab/GameJamIUT")
             if keys[pygame.K_BACKSPACE]:
                 waitUserResponse = False
                 restart = False
