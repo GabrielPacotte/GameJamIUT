@@ -98,6 +98,9 @@ class Player:
             self.inventory.append(fruit)
             return True
 
+    def setPoint(self, point: Point):
+        self.point = point
+
     # Used to draw the current image of the player at the right location of the screen
     def draw(self, window):
         window.blit(self.player_img, (self.point.x, self.point.y))
