@@ -111,7 +111,7 @@ if __name__ == '__main__':
             text_music = font.render("Musics : Double Dragon II: The Revenge", 1, (255, 255, 255))
             text_font = font.render("Font : Dafont.com - Dogica", 1, (255, 255, 255))
             text_sprites = font.render("Sprites : HeartBeast and PngAAA.com", 1, (255, 255, 255))
-            text_sons = font.render("Sons du coq et du hibou : lasonotheque.org", 1, (255, 255, 255))
+            text_sons = font.render("Rooster and owl sounds : lasonotheque.org", 1, (255, 255, 255))
             WIN.blit(text_music, (10, 695))
             WIN.blit(text_font, (10, 710))
             WIN.blit(text_sprites, (10, 725))
