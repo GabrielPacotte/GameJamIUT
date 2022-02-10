@@ -222,8 +222,8 @@ if __name__ == '__main__':
                                 nbApple = nbApple + 1
                             fruits.remove(fruit)
                             sound_fruits.play()
-                        else:
-                            fruit.drawFruit(WIN)
+                       # else:
+                        #    fruit.drawFruit(WIN)
                     elif fruit.inHitBoxGrandma(grandma.point):
                         fruits.remove(fruit)
 
