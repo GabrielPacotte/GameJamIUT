@@ -60,6 +60,8 @@ sound_fruits = pygame.mixer.Sound("sound/bruit_fruit.ogg")
 sound_grandma = pygame.mixer.Sound("sound/bruit_grandmere.mp3")
 sound_end = pygame.mixer.Sound("sound/bruit_fin.mp3")
 sound_enemy = pygame.mixer.Sound("sound/bruit_ennemi.mp3")
+sound_night = pygame.mixer.Sound("sound/bruit_nuit.wav")
+sound_day = pygame.mixer.Sound("sound/bruit_jour.wav")
 
 darkness = 0
 
@@ -89,7 +91,7 @@ if __name__ == '__main__':
     running = True
     while running:
         while waitUserResponse:
-            music_theme.play()
+            music_theme.play(loops=-1, maxtime=0, fade_ms=0)
             WIN.fill((0, 0, 0))
             if int(timer) % 2 == 1:
                 font = pygame.font.Font('fonts/dogica.ttf', 10)
@@ -112,7 +114,7 @@ if __name__ == '__main__':
                 running = False
         while restart:
             music_theme.stop()
-            music_quest.play()
+            music_quest.play(loops=-1, maxtime=0, fade_ms=0)
             time_cycle_before = pygame.time.get_ticks()
             time_cycle = pygame.time.get_ticks()
             while not perdu:
@@ -129,6 +131,7 @@ if __name__ == '__main__':
                         time_cycle_before = pygame.time.get_ticks()
                         cycle.cycleChange()
                         compteur_cycle = compteur_cycle + 1
+                        sound_day.play()
                         animCycleAnouncement('img/day.png')
 
                     font = pygame.font.Font('fonts/dogica.ttf', 10)
@@ -145,6 +148,7 @@ if __name__ == '__main__':
                     if time_cycle > 20000:
                         time_cycle_before = pygame.time.get_ticks()
                         cycle.cycleChange()
+                        sound_night.play()
                         animCycleAnouncement('img/night.png')
 
                     font = pygame.font.Font('fonts/dogica.ttf', 10)
