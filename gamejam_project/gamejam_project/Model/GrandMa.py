@@ -29,6 +29,13 @@ class GrandMa:
         else:
             return False
 
+    def inHitBoxHigher(self, point: Point) -> bool:  # pour déposer les fruits
+        if self.getPoint().getx() <= point.getx() <= self.getPoint().getx() + 80 \
+                and self.getPoint().gety() <= point.gety() <= self.getPoint().gety() + 120:
+            return True
+        else:
+            return False
+
     def inHitBoxBullet(self, point: Point) -> bool:
         point2 = Point(point.getx()+10, point.gety())
         point3 = Point(point.getx(), point.gety()+10)
@@ -44,7 +51,7 @@ class GrandMa:
         point3 = Point(point.getx(), point.gety()+63)
         point4 = Point(point.getx()+42, point.gety()+63)
 
-        if self.inHitBox(point) or self.inHitBox(point2) or self.inHitBox(point3) or self.inHitBox(point4):
+        if self.inHitBoxHigher(point) or self.inHitBoxHigher(point2) or self.inHitBoxHigher(point3) or self.inHitBoxHigher(point4):
             return True
         else:
             return False
