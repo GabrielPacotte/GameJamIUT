@@ -23,7 +23,7 @@ class GrandMa:
         return self.point
 
     def inHitBox(self, point: Point) -> bool:
-        if self.getPoint().getx() <= point.getx() <= self.getPoint().getx() + 100 \
+        if self.getPoint().getx() <= point.getx() <= self.getPoint().getx() + 60 \
                 and self.getPoint().gety() <= point.gety() <= self.getPoint().gety() + 100:
             return True
         else:
@@ -61,7 +61,7 @@ class GrandMa:
 
     def drawGrandma(self, window, bool):
         GRANDMA_IMG = pygame.image.load("img/grandma.png")
-        GRANDMA_IMG = pygame.transform.scale(GRANDMA_IMG, (100, 100))
+        GRANDMA_IMG = pygame.transform.scale(GRANDMA_IMG, (60, 100))
         if bool:
             GRANDMA_IMG = pygame.transform.flip(GRANDMA_IMG, True, True)
 

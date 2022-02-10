@@ -30,7 +30,7 @@ grass_img = pygame.image.load("img/grass.png")
 
 # First instances
 player = Player("Gab", 3, Point(100, 100), [])
-grandma = GrandMa("mamie", 100, Point(450, 334))
+grandma = GrandMa("mamie", 100, Point(470, 334))
 # Fruits
 time_Before = pygame.time.get_ticks()
 newFruitX = random.randint(0, 1004)
