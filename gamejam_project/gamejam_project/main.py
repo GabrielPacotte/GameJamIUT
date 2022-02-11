@@ -55,7 +55,7 @@ nbLemon = 0
 music_theme = pygame.mixer.Sound("sound/theme.ogg")
 music_theme.set_volume(0.5)
 music_quest = pygame.mixer.Sound("sound/quest.ogg")
-sound_1 = pygame.mixer.Sound("sound/briut1.ogg")
+sound_1 = pygame.mixer.Sound("sound/briut1.wav")
 sound_kalash = pygame.mixer.Sound("sound/bruit_kalash.ogg")
 sound_fruits = pygame.mixer.Sound("sound/bruit_fruit.ogg")
 sound_grandma = pygame.mixer.Sound("sound/bruit_grandmere.mp3")
