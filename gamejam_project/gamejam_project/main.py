@@ -111,9 +111,17 @@ if __name__ == '__main__':
             text_music = font.render("Musics : Double Dragon II: The Revenge", 1, (255, 255, 255))
             text_font = font.render("Font : Dafont.com - Dogica", 1, (255, 255, 255))
             text_sprites = font.render("Sprites : HeartBeast and PngAAA.com", 1, (255, 255, 255))
-            WIN.blit(text_music, (10, 710))
-            WIN.blit(text_font, (10, 725))
-            WIN.blit(text_sprites, (10, 740))
+            text_sons = font.render("Rooster and owl sounds : lasonotheque.org", 1, (255, 255, 255))
+            text_auteur1 = font.render("Alexis Riviere", 1, (255, 255, 255))
+            text_auteur2 = font.render("Bastien Guerin", 1, (255, 255, 255))
+            text_auteur3 = font.render("Gabriel Pacotte", 1, (255, 255, 255))
+            WIN.blit(text_music, (10, 695))
+            WIN.blit(text_font, (10, 710))
+            WIN.blit(text_sprites, (10, 725))
+            WIN.blit(text_sons, (10, 740))
+            WIN.blit(text_auteur1, (870, 710))
+            WIN.blit(text_auteur2, (870, 725))
+            WIN.blit(text_auteur3, (860, 740))
             pygame.display.update()
             keys = pygame.key.get_pressed()
             pygame.display.flip()
@@ -123,7 +131,7 @@ if __name__ == '__main__':
                 restart = True
                 timer = 0
             if keys[pygame.K_r]:
-                webbrowser.open("https://youtube.com")
+                webbrowser.open("https://github.com/PacGab/GameJamIUT")
             if keys[pygame.K_BACKSPACE]:
                 waitUserResponse = False
                 restart = False
